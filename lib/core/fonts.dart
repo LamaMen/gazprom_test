@@ -2,6 +2,12 @@ import 'dart:ui';
 
 import 'package:google_fonts/google_fonts.dart';
 
+final largeFont = GoogleFonts.ubuntu(
+  fontWeight: FontWeight.w500,
+  fontSize: 64,
+  height: 72 / 64,
+);
+
 final h1Font = GoogleFonts.ubuntu(
   fontWeight: FontWeight.w500,
   fontSize: 32,

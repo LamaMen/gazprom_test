@@ -16,7 +16,7 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final label = Text(
       'Войти',
-      style: b1FontMedium.copyWith(color: Colors.white),
+      style: b1FontMedium.copyWith(color: white),
     );
 
     return SizedBox(
@@ -53,7 +53,7 @@ class _Loader extends StatelessWidget {
       height: 24,
       child: CircularProgressIndicator(
         strokeWidth: 4,
-        color: Colors.white,
+        color: white,
       ),
     );
   }
