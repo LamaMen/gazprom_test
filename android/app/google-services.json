@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1088423394547",
+    "project_id": "gazprom-test-auth",
+    "storage_bucket": "gazprom-test-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088423394547:android:aee2db6c72b2ce2a668b86",
+        "android_client_info": {
+          "package_name": "com.example.gazprom_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088423394547-3083ra36053f8oldvc6b5tu5124g64d0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFp3HKcm4XYxgTIAbcMjcxpWR5AJklkDg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088423394547-3083ra36053f8oldvc6b5tu5124g64d0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
