@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:gazprom_test/features/weather/data/models/weather_list_dto_remote.dart';
+import 'package:gazprom_test/features/weather/data/models/weathers_list_remote.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
 

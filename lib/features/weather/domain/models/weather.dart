@@ -25,6 +25,8 @@ class Weather {
   final Wind wind;
   final Humidity humidity;
 
+  String get rawIcon => _image._code;
+
   String get smallIconPath {
     return _image._smallPath;
   }
@@ -32,6 +34,14 @@ class Weather {
   String get largeIconPath {
     return _image._largePath;
   }
+
+  @override
+  bool operator ==(Object other) {
+    return other is Weather && other.rawDate == rawDate;
+  }
+
+  @override
+  int get hashCode => rawDate;
 }
 
 @immutable

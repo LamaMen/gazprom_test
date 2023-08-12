@@ -1,8 +1,8 @@
-import 'package:gazprom_test/features/weather/data/models/city_dto_remote.dart';
+import 'package:gazprom_test/features/weather/data/models/city_remote.dart';
 import 'package:gazprom_test/features/weather/domain/models/weather.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'weather_list_dto_remote.g.dart';
+part 'weathers_list_remote.g.dart';
 
 @JsonSerializable(createToJson: false)
 class WeathersListRemote {

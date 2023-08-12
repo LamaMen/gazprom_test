@@ -1,7 +1,6 @@
 import 'package:gazprom_test/core/result.dart';
 import 'package:gazprom_test/features/weather/domain/dto/weather_list_dto.dart';
 import 'package:gazprom_test/features/weather/domain/failures.dart';
-import 'package:gazprom_test/features/weather/domain/models/place.dart';
 import 'package:gazprom_test/features/weather/domain/models/weather.dart';
 import 'package:gazprom_test/features/weather/domain/models/weather_info.dart';
 import 'package:gazprom_test/features/weather/domain/repositories/location_repository.dart';
@@ -59,19 +58,6 @@ class GetWeatherUseCase {
   bool _isNextWeather(Weather w) {
     final now = (DateTime.now().millisecondsSinceEpoch / 1000).floor();
     final dt = w.rawDate - now;
-    return dt < 10800;
-  }
-
-  WeatherInfo _createMock() {
-    const place = Place(1, 'Санкт-петербург');
-    const current = 1;
-    final weather = [
-      Weather(1691787600, 13.61, 13.61, 13.61, '01n', 'ясно', 1.8, 174, 70),
-      Weather(1691798400, 13.35, 12.83, 13.35, '02n', 'ясно', 1.75, 194, 70),
-      Weather(1691809200, 15.86, 15.86, 16.98, '13n', 'ясно', 1.56, 214, 63),
-      Weather(1691820000, 22.48, 22.48, 22.48, '50n', 'ясно', 2.29, 192, 41),
-    ];
-
-    return WeatherInfo(place, weather, current);
+    return 0 < dt && dt < 10800;
   }
 }

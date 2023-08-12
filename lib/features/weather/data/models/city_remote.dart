@@ -1,7 +1,7 @@
 import 'package:gazprom_test/features/weather/domain/models/place.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'city_dto_remote.g.dart';
+part 'city_remote.g.dart';
 
 @JsonSerializable(createToJson: false)
 class CityRemote {
