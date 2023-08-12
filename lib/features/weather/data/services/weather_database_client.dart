@@ -98,6 +98,13 @@ class WeatherDatabaseClient {
     if (place == null) return null;
     return Place(place['id'] as int, place['name'] as String);
   }
+
+  Future<void> deleteOldWeather() async {
+    final db = await DatabaseHelper.getDatabase();
+    final now = (DateTime.now().millisecondsSinceEpoch / 1000).floor();
+    final lastT = now - 43200;
+    await db.delete('weather', where: 'dt < ?', whereArgs: [lastT]);
+  }
 }
 
 /// From https://www.kobzarev.com/programming/calculation-of-distances-between-cities-on-their-coordinates/

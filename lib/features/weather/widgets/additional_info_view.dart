@@ -70,7 +70,7 @@ class _AdditionInfoRow extends StatelessWidget {
           flex: 6,
           child: Text(
             title,
-            style: b2Font.copyWith(color: white),
+            style: b2Font,
           ),
         ),
       ],

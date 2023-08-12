@@ -17,7 +17,7 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final label = Text(
       'Войти',
-      style: b1FontMedium.copyWith(color: white),
+      style: b1FontMedium,
     );
 
     return SizedBox(

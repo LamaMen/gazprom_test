@@ -44,12 +44,12 @@ class WeatherFailureBody extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Text('Произошла ошибка', style: h2Font.copyWith(color: white)),
+              Text('Произошла ошибка', style: h2Font),
               const SizedBox(height: 8),
               Expanded(
                 child: SizedBox(
                   width: double.infinity,
-                  child: Text(error, style: b1Font.copyWith(color: white)),
+                  child: Text(error, style: b1Font),
                 ),
               ),
               const _ReloadButton(),
@@ -75,7 +75,7 @@ class _ReloadButton extends StatelessWidget {
         style: _style,
         child: Text(
           'Попробовать снова',
-          style: b1FontMedium.copyWith(color: white),
+          style: b1FontMedium,
         ),
       ),
     );

@@ -52,9 +52,9 @@ class _DateView extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Row(
         children: [
-          Text('Сегодня', style: b1FontMedium.copyWith(color: white)),
+          Text('Сегодня', style: b1FontMedium),
           const Spacer(),
-          Text(date, style: b2Font.copyWith(color: white)),
+          Text(date, style: b2Font),
         ],
       ),
     );
@@ -120,9 +120,9 @@ class _Weather extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(formatter.format(time), style: b2Font.copyWith(color: white)),
+            Text(formatter.format(time), style: b2Font),
             Expanded(child: SvgPicture.asset(weather.smallIconPath)),
-            Text('$tempº', style: b1FontMedium.copyWith(color: white)),
+            Text('$tempº', style: b1FontMedium),
           ],
         ),
       ),

@@ -33,7 +33,11 @@ class _AuthScreenState extends State<AuthScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: BlocBuilder<AuthBloc, AuthState>(
+          child: BlocConsumer<AuthBloc, AuthState>(
+            listenWhen: (_, state) => state is LoginSuccessState,
+            listener: (context, state) {
+              Navigator.pushReplacementNamed(context, '/weather');
+            },
             builder: (context, state) {
               final failure = state is LoginFailedState ? state.failure : null;
 

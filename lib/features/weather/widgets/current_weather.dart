@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gazprom_test/core/colors.dart';
 import 'package:gazprom_test/core/fonts.dart';
 import 'package:gazprom_test/features/weather/domain/models/weather.dart';
 import 'package:intl/intl.dart';
@@ -19,10 +18,10 @@ class CurrentWeather extends StatelessWidget {
     return Column(
       children: [
         Expanded(child: _WeatherImage(current.largeIconPath)),
-        Text('$tempº', style: largeFont.copyWith(color: white)),
-        Text(description, style: b1Font.copyWith(color: white)),
+        Text('$tempº', style: largeFont),
+        Text(description, style: b1Font),
         const SizedBox(height: 8),
-        Text('$maxTemp $minTemp', style: b1Font.copyWith(color: white)),
+        Text('$maxTemp $minTemp', style: b1Font),
       ],
     );
   }
