@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazprom_test/core/colors.dart';
 import 'package:gazprom_test/core/fonts.dart';
+import 'package:gazprom_test/features/weather/bloc/weather_bloc.dart';
 import 'package:gazprom_test/features/weather/domain/models/weather.dart';
 import 'package:intl/intl.dart';
 
@@ -69,8 +71,13 @@ class _WeathersRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> views = [];
     for (final (i, item) in weathers.indexed) {
-      views.add(
-          Expanded(child: _Weather(weather: item, isCurrent: i == current)));
+      views.add(Expanded(
+        child: _Weather(
+          weather: item,
+          isCurrent: i == current,
+          index: i,
+        ),
+      ));
     }
 
     return Padding(
@@ -83,10 +90,15 @@ class _WeathersRow extends StatelessWidget {
 }
 
 class _Weather extends StatelessWidget {
-  const _Weather({required this.weather, required this.isCurrent});
+  const _Weather({
+    required this.weather,
+    required this.isCurrent,
+    required this.index,
+  });
 
   final Weather weather;
   final bool isCurrent;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -94,20 +106,25 @@ class _Weather extends StatelessWidget {
     final formatter = DateFormat.Hm();
     final temp = weather.temp.round();
 
-    return Container(
-      height: 142,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: isCurrent ? milky : null,
-        border: isCurrent ? Border.all(width: 1.0, color: white) : null,
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-      ),
-      child: Column(
-        children: [
-          Text(formatter.format(time), style: b2Font.copyWith(color: white)),
-          Expanded(child: SvgPicture.asset(weather.smallIconPath)),
-          Text('$tempº', style: b1FontMedium.copyWith(color: white)),
-        ],
+    return InkWell(
+      onTap: () {
+        context.read<WeatherBloc>().add(ChangeCurrentWeatherEvent(index));
+      },
+      child: Container(
+        height: 142,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: isCurrent ? milky : null,
+          border: isCurrent ? Border.all(width: 1.0, color: white) : null,
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+        ),
+        child: Column(
+          children: [
+            Text(formatter.format(time), style: b2Font.copyWith(color: white)),
+            Expanded(child: SvgPicture.asset(weather.smallIconPath)),
+            Text('$tempº', style: b1FontMedium.copyWith(color: white)),
+          ],
+        ),
       ),
     );
   }

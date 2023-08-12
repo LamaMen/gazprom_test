@@ -11,7 +11,7 @@ part 'weather_api_client.g.dart';
 abstract class RegisterModule {
   WeatherApiClient get weatherClient {
     final dio = Dio();
-    dio.interceptors.add(_allMessagesInterceptor);
+    // dio.interceptors.add(_allMessagesInterceptor);
     return WeatherApiClient(dio);
   }
 
@@ -35,7 +35,7 @@ abstract class WeatherApiClient {
   factory WeatherApiClient(Dio dio) = _WeatherApiClient;
 
   @GET("/forecast")
-  Future<WeatherListDtoRemote> fetchWeather(
+  Future<WeathersListRemote> fetchWeather(
     @Query("lat") double lat,
     @Query("lon") double lon, [
     @Query("appid") String apikey = '79d298ef85f365588ab37ddde21e58f9',

@@ -1,33 +1,30 @@
-import 'package:gazprom_test/features/weather/domain/dto/city_dto.dart';
+import 'package:gazprom_test/features/weather/domain/models/place.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'city_dto_remote.g.dart';
 
 @JsonSerializable(createToJson: false)
-class CityDtoRemote implements CityDto {
-  const CityDtoRemote(this.id, this.name, this.coordinates);
+class CityRemote {
+  const CityRemote(this.id, this.name, this.coordinates);
 
-  @override
   final int id;
-  @override
   final String name;
-  @override
   @JsonKey(name: 'coord')
-  final CoordinatesDtoRemote coordinates;
+  final CoordinatesRemote coordinates;
 
-  factory CityDtoRemote.fromJson(Map<String, dynamic> json) =>
-      _$CityDtoRemoteFromJson(json);
+  factory CityRemote.fromJson(Map<String, dynamic> json) =>
+      _$CityRemoteFromJson(json);
+
+  Place toPlace() => Place(id, name);
 }
 
 @JsonSerializable(createToJson: false)
-class CoordinatesDtoRemote implements CoordinatesDto {
-  const CoordinatesDtoRemote(this.lat, this.lon);
+class CoordinatesRemote {
+  const CoordinatesRemote(this.lat, this.lon);
 
-  @override
   final double lat;
-  @override
   final double lon;
 
-  factory CoordinatesDtoRemote.fromJson(Map<String, dynamic> json) =>
-      _$CoordinatesDtoRemoteFromJson(json);
+  factory CoordinatesRemote.fromJson(Map<String, dynamic> json) =>
+      _$CoordinatesRemoteFromJson(json);
 }

@@ -1,109 +1,109 @@
 import 'package:gazprom_test/features/weather/data/models/city_dto_remote.dart';
-import 'package:gazprom_test/features/weather/domain/dto/weather_list_dto.dart';
+import 'package:gazprom_test/features/weather/domain/models/weather.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'weather_list_dto_remote.g.dart';
 
 @JsonSerializable(createToJson: false)
-class WeatherListDtoRemote implements WeatherListDto {
-  const WeatherListDtoRemote(this.list, this.city);
+class WeathersListRemote {
+  const WeathersListRemote(this.list, this.city);
 
-  @override
-  final List<WeatherDtoRemote> list;
+  final List<WeatherRemote> list;
+  final CityRemote city;
 
-  @override
-  final CityDtoRemote city;
-
-  factory WeatherListDtoRemote.fromJson(Map<String, dynamic> json) =>
-      _$WeatherListDtoRemoteFromJson(json);
+  factory WeathersListRemote.fromJson(Map<String, dynamic> json) =>
+      _$WeathersListRemoteFromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
-class WeatherDtoRemote implements WeatherDto {
-  const WeatherDtoRemote(
+class WeatherRemote {
+  const WeatherRemote(
     this.date,
     this.mainInfo,
     this.info,
     this.wind,
   );
 
-  @override
   @JsonKey(name: 'dt')
   final int date;
 
-  @override
   @JsonKey(name: 'main')
-  final MainWeatherInfoDtoRemote mainInfo;
+  final MainWeatherInfoRemote mainInfo;
 
-  @override
   @JsonKey(name: 'weather')
-  final List<WeatherInfoDtoRemote> info;
+  final List<WeatherInfoRemote> info;
 
-  @override
   @JsonKey(name: 'wind')
-  final WindDtoRemote wind;
+  final WindRemote wind;
 
-  factory WeatherDtoRemote.fromJson(Map<String, dynamic> json) =>
-      _$WeatherDtoRemoteFromJson(json);
+  factory WeatherRemote.fromJson(Map<String, dynamic> json) =>
+      _$WeatherRemoteFromJson(json);
+
+  Weather toWeather() {
+    final weatherInfo = info.first;
+    return Weather(
+      date,
+      mainInfo.temp,
+      mainInfo.tempMin,
+      mainInfo.tempMax,
+      weatherInfo.icon,
+      weatherInfo.description,
+      wind.speed,
+      wind.deg,
+      mainInfo.humidity,
+    );
+  }
 }
 
 @JsonSerializable(createToJson: false)
-class MainWeatherInfoDtoRemote implements MainWeatherInfoDto {
-  const MainWeatherInfoDtoRemote(
+class MainWeatherInfoRemote {
+  const MainWeatherInfoRemote(
     this.temp,
     this.tempMin,
     this.tempMax,
     this.humidity,
   );
 
-  @override
   final double temp;
 
-  @override
   @JsonKey(name: 'temp_min')
   final double tempMin;
 
-  @override
   @JsonKey(name: 'temp_max')
   final double tempMax;
 
-  @override
   final int humidity;
 
-  factory MainWeatherInfoDtoRemote.fromJson(Map<String, dynamic> json) =>
-      _$MainWeatherInfoDtoRemoteFromJson(json);
+  factory MainWeatherInfoRemote.fromJson(Map<String, dynamic> json) =>
+      _$MainWeatherInfoRemoteFromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
-class WeatherInfoDtoRemote implements WeatherInfoDto {
-  const WeatherInfoDtoRemote(
+class WeatherInfoRemote {
+  const WeatherInfoRemote(
     this.description,
     this.icon,
   );
 
-  @override
   final String description;
 
-  @override
   final String icon;
 
-  factory WeatherInfoDtoRemote.fromJson(Map<String, dynamic> json) =>
-      _$WeatherInfoDtoRemoteFromJson(json);
+  factory WeatherInfoRemote.fromJson(Map<String, dynamic> json) =>
+      _$WeatherInfoRemoteFromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
-class WindDtoRemote implements WindDto {
-  const WindDtoRemote(
+class WindRemote {
+  const WindRemote(
     this.speed,
     this.deg,
   );
 
-  @override
   final double speed;
 
-  @override
   final int deg;
 
-  factory WindDtoRemote.fromJson(Map<String, dynamic> json) =>
-      _$WindDtoRemoteFromJson(json);
+  factory WindRemote.fromJson(Map<String, dynamic> json) =>
+      _$WindRemoteFromJson(json);
 }

@@ -1,5 +1,6 @@
 import 'package:gazprom_test/core/result.dart';
 import 'package:gazprom_test/features/weather/domain/dto/weather_list_dto.dart';
+import 'package:gazprom_test/features/weather/domain/failures.dart';
 import 'package:gazprom_test/features/weather/domain/models/place.dart';
 import 'package:gazprom_test/features/weather/domain/models/weather.dart';
 import 'package:gazprom_test/features/weather/domain/models/weather_info.dart';
@@ -24,30 +25,41 @@ class GetWeatherUseCase {
         await _weatherRepository.getWeatherByLocation(location.value);
 
     return weather.fold((f) => f.asError(), (dto) {
-      final info = _createByDto(dto);
-      return Success(info);
+      return _selectNearestWeathers(dto);
     });
   }
 
-  WeatherInfo _createByDto(WeatherListDto dto) {
-    final place = Place(dto.city.id, dto.city.name);
-    final weathers = dto.list.take(4).map((w) {
-      final info = w.info.first;
+  Result<WeatherInfo> _selectNearestWeathers(WeatherWithPlaceDto dto) {
+    final weathers = dto.list;
+    final count = weathers.length;
+    weathers.sort((a, b) => a.rawDate.compareTo(b.rawDate));
+    final current = weathers.indexWhere(_isNextWeather);
+    if (current == -1 || count < 4) {
+      return const WeatherProcessFailure().asError();
+    }
 
-      return Weather(
-        w.date,
-        w.mainInfo.temp,
-        w.mainInfo.tempMin,
-        w.mainInfo.tempMax,
-        info.icon,
-        info.description,
-        w.wind.speed,
-        w.wind.deg,
-        w.mainInfo.humidity,
-      );
-    }).toList();
+    late final Iterable<Weather> nearest;
+    late final int next;
 
-    return WeatherInfo(place, weathers, 1);
+    if (current == 0) {
+      next = 0;
+      nearest = weathers.getRange(0, 4);
+    } else if (current >= count - 2) {
+      nearest = weathers.getRange(count - 4, count);
+      next = 4 - (count - current);
+    } else {
+      nearest = weathers.getRange(current - 1, current + 3);
+      next = 1;
+    }
+
+    final weather = WeatherInfo(dto.place, nearest.toList(), next);
+    return Success(weather);
+  }
+
+  bool _isNextWeather(Weather w) {
+    final now = (DateTime.now().millisecondsSinceEpoch / 1000).floor();
+    final dt = w.rawDate - now;
+    return dt < 10800;
   }
 
   WeatherInfo _createMock() {

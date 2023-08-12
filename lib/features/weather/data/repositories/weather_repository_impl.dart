@@ -14,11 +14,13 @@ class WeatherRepositoryImpl implements WeatherRepository {
   final WeatherApiClient _client;
 
   @override
-  FResult<WeatherListDto> getWeatherByLocation(Location location) async {
+  FResult<WeatherWithPlaceDto> getWeatherByLocation(Location location) async {
     try {
       final weather = await _client.fetchWeather(location.lat, location.lon);
+      final place = weather.city.toPlace();
+      final weathers = weather.list.map((w) => w.toWeather()).toList();
 
-      return Success(weather);
+      return Success(WeatherWithPlaceDto(weathers, place));
     } on DioException catch (e) {
       if (e.type == DioExceptionType.connectionError) {
         return const InternetFailure().asError();

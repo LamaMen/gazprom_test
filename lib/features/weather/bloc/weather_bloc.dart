@@ -6,12 +6,14 @@ import 'package:gazprom_test/features/weather/domain/models/weather_info.dart';
 import 'package:injectable/injectable.dart';
 
 part 'weather_event.dart';
+
 part 'weather_state.dart';
 
 @injectable
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   WeatherBloc(this._getWeather) : super(const InitialState()) {
     on<GetWeatherEvent>(onWeatherLoaded);
+    on<ChangeCurrentWeatherEvent>(onChangeWeather);
   }
 
   final GetWeatherUseCase _getWeather;
@@ -24,5 +26,11 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       (f) => FailedState(f),
       (w) => SuccessState(w),
     ));
+  }
+
+  void onChangeWeather(ChangeCurrentWeatherEvent event, Emitter emit) {
+    final old = (state as SuccessState).weatherInfo;
+    final weather = WeatherInfo(old.place, old.nearest, event.index);
+    emit(SuccessState(weather));
   }
 }

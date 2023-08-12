@@ -3,5 +3,5 @@ import 'package:gazprom_test/features/weather/domain/dto/weather_list_dto.dart';
 import 'package:gazprom_test/features/weather/domain/models/location.dart';
 
 abstract class WeatherRepository {
-  FResult<WeatherListDto> getWeatherByLocation(Location location);
+  FResult<WeatherWithPlaceDto> getWeatherByLocation(Location location);
 }

@@ -11,3 +11,7 @@ class LocationPermissionDeniedFailure extends Failure {
 class LocationPermissionDeniedForeverFailure extends Failure {
   const LocationPermissionDeniedForeverFailure();
 }
+
+class WeatherProcessFailure extends Failure {
+  const WeatherProcessFailure();
+}
