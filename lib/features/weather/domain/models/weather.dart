@@ -9,9 +9,12 @@ class Weather {
     this.tempMax,
     String imageCode,
     this.description,
-    this.wind,
-    this.humidity,
-  ) : _image = _ImageHelper(imageCode);
+    double windSpeed,
+    int windDeg,
+    int humidity,
+  )   : _image = _ImageHelper(imageCode),
+        wind = Wind(windSpeed, windDeg),
+        humidity = Humidity(humidity);
 
   final int rawDate;
   final double temp;
@@ -74,13 +77,13 @@ class _ImageHelper {
 
 @immutable
 class Wind {
-  const Wind(this.wind, this.deg);
+  const Wind(this.speed, this.deg);
 
-  final double wind;
+  final double speed;
   final int deg;
 
   String get value {
-    final windSpeed = wind.round();
+    final windSpeed = speed.round();
     return '$windSpeed м/с';
   }
 
