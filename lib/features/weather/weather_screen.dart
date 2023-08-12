@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazprom_test/core/widgets.dart';
 import 'package:gazprom_test/features/weather/bloc/weather_bloc.dart';
 import 'package:gazprom_test/features/weather/domain/models/weather_info.dart';
 import 'package:gazprom_test/features/weather/widgets/additional_info_view.dart';
 import 'package:gazprom_test/features/weather/widgets/all_weather_view.dart';
 import 'package:gazprom_test/features/weather/widgets/current_weather.dart';
 import 'package:gazprom_test/features/weather/widgets/place_title.dart';
+import 'package:gazprom_test/features/weather/widgets/weather_failure_body.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -41,7 +43,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
               return _WeatherBody(state.weatherInfo);
             }
 
-            return const SizedBox.shrink();
+            if (state is FailedState) {
+              return WeatherFailureBody(state.failure);
+            }
+
+            return const Center(child: Loader(size: 48, width: 4));
           },
         ),
       ),

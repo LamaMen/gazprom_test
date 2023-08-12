@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazprom_test/core/colors.dart';
 import 'package:gazprom_test/core/failure.dart';
 import 'package:gazprom_test/core/fonts.dart';
-import 'package:gazprom_test/features/auth/domain/failure.dart';
+import 'package:gazprom_test/features/auth/domain/failures.dart';
 
 class EmailField extends StatelessWidget {
   const EmailField({

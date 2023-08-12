@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazprom_test/core/failure.dart';
-import 'package:gazprom_test/features/weather/domain/get_weather_usecase.dart';
+import 'package:gazprom_test/features/weather/domain/usecases/get_weather_usecase.dart';
 import 'package:gazprom_test/features/weather/domain/models/weather_info.dart';
 import 'package:injectable/injectable.dart';
 

@@ -20,6 +20,7 @@ dependencies:
   injectable: ^2.2.0
   get_it: ^7.6.0
   intl: ^0.18.1
+  geolocator: ^9.0.2
 
 dev_dependencies:
   flutter_test:

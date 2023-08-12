@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazprom_test/core/colors.dart';
 import 'package:gazprom_test/core/fonts.dart';
+import 'package:gazprom_test/core/widgets.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({
@@ -24,7 +25,7 @@ class LoginButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: _style,
-        child: isLoad ? const _Loader() : label,
+        child: isLoad ? const Loader(size: 24, width: 4) : label,
       ),
     );
   }
@@ -39,22 +40,6 @@ class LoginButton extends StatelessWidget {
       padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(padding),
       backgroundColor: MaterialStateProperty.all<Color?>(primary),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(border),
-    );
-  }
-}
-
-class _Loader extends StatelessWidget {
-  const _Loader();
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox(
-      width: 24,
-      height: 24,
-      child: CircularProgressIndicator(
-        strokeWidth: 4,
-        color: white,
-      ),
     );
   }
 }

@@ -8,7 +8,6 @@ class WrongEmailFormatFailure extends Failure {
   const WrongEmailFormatFailure();
 }
 
-
 class WrongPasswordFailure extends Failure {
   const WrongPasswordFailure();
 }

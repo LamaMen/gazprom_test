@@ -2,11 +2,25 @@ import 'package:gazprom_test/core/result.dart';
 import 'package:gazprom_test/features/weather/domain/models/place.dart';
 import 'package:gazprom_test/features/weather/domain/models/weather.dart';
 import 'package:gazprom_test/features/weather/domain/models/weather_info.dart';
+import 'package:gazprom_test/features/weather/domain/repositories/location_repository.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class GetWeatherUseCase {
-  Future<Result<WeatherInfo>> call() async {
+  const GetWeatherUseCase(this.locationRepository);
+
+  final LocationRepository locationRepository;
+
+  FResult<WeatherInfo> call() async {
+    final location = await locationRepository.getCurrentLocation();
+    if (location.isError) {
+      return location.failure.asError();
+    }
+
+    return Success(_createMock());
+  }
+
+  WeatherInfo _createMock() {
     const place = Place(1, 'Санкт-петербург');
     const current = 1;
     const weather = [
@@ -20,6 +34,6 @@ class GetWeatherUseCase {
           Humidity(41)),
     ];
 
-    return const Success(WeatherInfo(place, weather, current));
+    return const WeatherInfo(place, weather, current);
   }
 }

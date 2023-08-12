@@ -1,5 +1,7 @@
 import 'package:gazprom_test/core/failure.dart';
 
+typedef FResult<S> = Future<Result<S>>;
+
 abstract class Result<S> {
   const Result();
 
@@ -54,5 +56,6 @@ class Success<S> extends Result<S> {
 }
 
 extension FailureWrapper on Failure {
-  Result get asError => Error(this);
+  // Result get asError => Error(this);
+  Result<S> asError<S>() => Error<S>(this);
 }
