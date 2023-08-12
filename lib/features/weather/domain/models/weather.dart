@@ -2,32 +2,73 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class Weather {
-  const Weather(
+  Weather(
     this.rawDate,
     this.temp,
     this.tempMin,
     this.tempMax,
-    this.icon,
+    String imageCode,
     this.description,
     this.wind,
     this.humidity,
-  );
+  ) : _image = _ImageHelper(imageCode);
 
   final int rawDate;
   final double temp;
   final double tempMin;
   final double tempMax;
-  final String icon;
+  final _ImageHelper _image;
   final String description;
   final Wind wind;
   final Humidity humidity;
 
   String get smallIconPath {
-    return 'assets/sun_small.svg';
+    return _image._smallPath;
   }
 
   String get largeIconPath {
-    return 'assets/sun_large.png';
+    return _image._largePath;
+  }
+}
+
+@immutable
+class _ImageHelper {
+  const _ImageHelper(this._code);
+
+  final String _code;
+
+  String get _weatherCode {
+    return _code.substring(0, 2);
+  }
+
+  String get _timeOfDay {
+    return _code.substring(2);
+  }
+
+  String get _smallPath {
+    final iconCode = _weatherCode;
+
+    if (iconCode == '01') return 'assets/sun_small.svg';
+    if (iconCode == '09' || iconCode == '10') return 'assets/rain_small.svg';
+    if (iconCode == '11') return 'assets/storm_small.svg';
+    if (iconCode == '13') return 'assets/snow_small.svg';
+    if ((iconCode == '02' || iconCode == '03') && _timeOfDay == 'n') {
+      return 'assets/cloudy_night_small.svg';
+    }
+
+    return 'assets/cloudy_day_small.svg';
+  }
+
+  String get _largePath {
+    final iconCode = _weatherCode;
+
+    if (iconCode == '01') return 'assets/sun_large.png';
+    if (iconCode == '09') return 'assets/shower_rain_large.png';
+    if (iconCode == '10') return 'assets/rain_large.png';
+    if (iconCode == '11') return 'assets/storm_large.png';
+    if (iconCode == '13') return 'assets/snow_large.png';
+
+    return 'assets/cloudy_large.png';
   }
 }
 
