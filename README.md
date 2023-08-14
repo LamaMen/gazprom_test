@@ -1,16 +1,16 @@
-# gazprom_test
+# Тестовое задание для компании "Газпром Нефть"
 
-A new Flutter project.
+Особенности реализации:
+* Приложение реализовано согласно предоставленному макету
+* При разработке использовались: Bloc, GetIt (для DI), Firebase Auth (аутентификация), Geolocator (текущее местоположение), Dio + Retrofit (выполнение запросов), Sqflite (кеширование)
+* В приложении реализован только вход (данные для входа test@mail.com:password)
+* При входе запоминается текущий пользователь и при следующем входе нет необходимости заново вводить данные
+* Данные о погоде загружаются по текущему местоположению 
+* На главном экране отображается ближайший прогноз
+* Добавлена возможность посмотреть другие прогнозы (см. WeatherBloc)
+* Учтены случаи, когда нет разрешения на получение геопозиции
+* Учтены случаи, когда нет интернета
+* Если ранее были загружены данные, то при запросе к кешу возвращаются данные по ближайшей точке от текущей
+* При входе в приложении из памяти удаляются старые данные по погоде (те, которые уже точно не понадобятся)
+* Собранное в релизной сборке приложение будет загружено в релизы на GitHub
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
